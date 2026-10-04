@@ -2,7 +2,7 @@
 
 Serverless service that accepts bets for online casino games. It is built on AWS API Gateway, Lambda and DynamoDB, written in TypeScript, and runs locally against [MiniStack](https://github.com/ministackorg/ministack), a local AWS emulator.
 
-It addresses a specific problem: a casino betting platform whose capacity is fixed cannot absorb the nightly peak between 22:00 and 00:00, which costs revenue and degrades the player experience. The design goal is a bet placement path with no fixed capacity anywhere, able in theory to serve 2 million concurrent users.
+It addresses a specific problem: a casino betting platform whose capacity is fixed cannot absorb the nightly peak between 22:00 and 00:00, which costs revenue and degrades the player experience. The design goal is a bet placement path with no fixed capacity anywhere, able to serve 2 million concurrent users.
 
 ## Overview
 
