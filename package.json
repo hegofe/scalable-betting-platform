@@ -1,0 +1,51 @@
+{
+  "name": "scalable-betting-platform",
+  "version": "1.0.0",
+  "description": "Serverless bet placement service built on API Gateway, Lambda and DynamoDB",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "esbuild placeBet=src/handlers/placeBet.ts createRound=src/handlers/createRound.ts --bundle --platform=node --target=node22 --format=esm --main-fields=module,main --minify --sourcemap --outdir=dist --entry-names=[name]/index --out-extension:.js=.mjs",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "local:up": "docker compose up -d --wait",
+    "local:down": "docker compose down",
+    "db:create": "tsx --env-file=.env scripts/createTables.ts",
+    "db:seed": "tsx --env-file=.env scripts/seed.ts",
+    "db:admin": "node --env-file=.env node_modules/dynamodb-admin/dist/dynamodb-admin.js --open",
+    "deploy": "npm run build && tsx --env-file=.env scripts/deploy.ts",
+    "load-test": "tsx --env-file=.env scripts/loadTest.ts",
+    "local:setup": "npm run local:up && npm run db:create && npm run db:seed && npm run deploy"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.1146.0",
+    "@aws-sdk/lib-dynamodb": "^3.1146.0"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-apigatewayv2": "^3.1146.0",
+    "@aws-sdk/client-lambda": "^3.1146.0",
+    "@eslint/js": "^10.0.1",
+    "@types/autocannon": "^7.12.7",
+    "@types/aws-lambda": "^8.10.164",
+    "@types/node": "^24.19.1",
+    "autocannon": "^8.0.0",
+    "dynamodb-admin": "^5.3.3",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.12.0",
+    "eslint-config-prettier": "^10.1.8",
+    "fflate": "^0.8.3",
+    "prettier": "^3.9.9",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.0",
+    "vitest": "^5.0.3"
+  }
+}

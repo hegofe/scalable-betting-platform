@@ -1,0 +1,8 @@
+name: scalable-betting-platform
+
+services:
+  ministack:
+    image: ministackorg/ministack:1.5.17
+    container_name: sbp-ministack
+    ports:
+      - "4566:4566"
